@@ -1,9 +1,7 @@
 package io.github.bruno.msclient.entities;
 
-import java.io.Serializable;
+public class PersonEntity {
 
-public class PersonEntity implements Serializable {
-    private static final long serialVersionUID = 1L;
     private Integer id;
     private String firstname;
     private String lastname;
@@ -13,11 +11,16 @@ public class PersonEntity implements Serializable {
     public PersonEntity() {
     }
 
-    public PersonEntity(String firstname, String lastname, String address, String gender) {
+    public PersonEntity(Integer id, String firstname, String lastname, String address, String gender) {
+        this.id = id;
         this.firstname = firstname;
         this.lastname = lastname;
         this.address = address;
         this.gender = gender;
+    }
+
+    public Integer getId() {
+        return id;
     }
 
     public String getFirstname() {
@@ -34,5 +37,16 @@ public class PersonEntity implements Serializable {
 
     public String getGender() {
         return gender;
+    }
+
+    @Override
+    public String toString() {
+        return "PersonEntity{" +
+                "id=" + id +
+                ", firstname='" + firstname + '\'' +
+                ", lastname='" + lastname + '\'' +
+                ", address='" + address + '\'' +
+                ", gender='" + gender + '\'' +
+                '}';
     }
 }
