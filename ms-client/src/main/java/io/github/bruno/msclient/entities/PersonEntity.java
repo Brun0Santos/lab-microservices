@@ -1,9 +1,17 @@
 package io.github.bruno.msclient.entities;
 
+import jakarta.persistence.*;
+
+@Entity
+@Table(name = "tb_person")
 public class PersonEntity {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+    @Column(name = "first_name", nullable = false)
     private String firstname;
+    @Column(name = "last_name", nullable = false)
     private String lastname;
     private String address;
     private String gender;
@@ -11,8 +19,7 @@ public class PersonEntity {
     public PersonEntity() {
     }
 
-    public PersonEntity(Integer id, String firstname, String lastname, String address, String gender) {
-        this.id = id;
+    public PersonEntity(String firstname, String lastname, String address, String gender) {
         this.firstname = firstname;
         this.lastname = lastname;
         this.address = address;

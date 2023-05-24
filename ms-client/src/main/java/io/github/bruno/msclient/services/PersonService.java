@@ -1,34 +1,42 @@
 package io.github.bruno.msclient.services;
 
 import io.github.bruno.msclient.entities.PersonEntity;
+import io.github.bruno.msclient.repositories.PersonRepository;
+import jakarta.transaction.Transactional;
+import jakarta.ws.rs.NotFoundException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.logging.Logger;
 
 @Service
 public class PersonService {
+
+    @Autowired
+    private PersonRepository personRepository;
     private final Logger logger = Logger.getLogger(PersonService.class.getName());
 
-    PersonEntity bruno = new PersonEntity(1, "Bruno", "Santos", "rua boa vista", "983191919");
-    PersonEntity lucas = new PersonEntity(2, "Lucas", "Pereira", "rua santa rosa", "8982323232");
-    PersonEntity felipe = new PersonEntity(3, "Felipe", "Kleber", "rua Dom Pedro", "232323156731");
-    List<PersonEntity> persons = new ArrayList<>();
-
-    public PersonService() {
-        persons.add(bruno);
-        persons.add(lucas);
-        persons.add(felipe);
+    public List<PersonEntity> getUsers() {
+        return personRepository.findAll();
     }
 
-    public List<PersonEntity> getById(Integer id) {
-        logger.info("Finding one person");
-        return persons.stream().filter(t -> t.getId() == id).toList();
+    public Optional<PersonEntity> getById(Integer id) {
+        return personRepository.findById(id);
     }
 
+    @Transactional
     public void saveToUser(PersonEntity person) {
-        System.out.println(persons);
-        persons.add(new PersonEntity(person.getId(), person.getFirstname(), person.getLastname(), person.getAddress(), person.getGender()));
+        personRepository.save(person);
+    }
+
+    @Transactional
+    public void deleteToUser(Integer id) {
+        Optional<PersonEntity> user = personRepository.findById(id);
+        if (user.isEmpty()) {
+            throw new NotFoundException("User not found");
+        }
+        personRepository.deleteById(id);
     }
 }
