@@ -1,7 +1,9 @@
 package io.github.bruno.msclient.controllers;
 
+import io.github.bruno.msclient.dto.PersonDto;
 import io.github.bruno.msclient.entities.PersonEntity;
 import io.github.bruno.msclient.services.PersonService;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,6 +18,9 @@ public class PersonController {
 
     @Autowired
     private PersonService personService;
+
+    @Autowired
+    private ModelMapper mapper;
 
     @GetMapping("/status")
     public String sendStatus() {
@@ -34,9 +39,9 @@ public class PersonController {
     }
 
     @PostMapping
-    public ResponseEntity<String> saveToUserInDatabase(@RequestBody PersonEntity person) {
+    public ResponseEntity<PersonDto> saveToUserInDatabase(@RequestBody PersonEntity person) {
         personService.saveToUser(person);
-        return ResponseEntity.status(HttpStatus.CREATED).build();
+        return ResponseEntity.status(HttpStatus.CREATED).body(mapper.map(person, PersonDto.class));
     }
 
     @DeleteMapping("/{id}")
