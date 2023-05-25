@@ -1,5 +1,6 @@
 package io.github.bruno.msclient.entities;
 
+import io.github.bruno.msclient.enums.GenderEnum;
 import jakarta.persistence.*;
 
 @Entity
@@ -14,12 +15,13 @@ public class PersonEntity {
     @Column(name = "last_name", nullable = false)
     private String lastname;
     private String address;
-    private String gender;
+    @Enumerated(EnumType.STRING)
+    private GenderEnum gender;
 
     public PersonEntity() {
     }
 
-    public PersonEntity(String firstname, String lastname, String address, String gender) {
+    public PersonEntity(String firstname, String lastname, String address, GenderEnum gender) {
         this.firstname = firstname;
         this.lastname = lastname;
         this.address = address;
@@ -42,7 +44,7 @@ public class PersonEntity {
         return address;
     }
 
-    public String getGender() {
+    public GenderEnum getGender() {
         return gender;
     }
 

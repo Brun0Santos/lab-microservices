@@ -40,7 +40,8 @@ public class PersonController {
     }
 
     @DeleteMapping("/{id}")
-    public void deleteToUser(@PathVariable("id") Integer id) {
+    public ResponseEntity<String> deleteToUser(@PathVariable("id") Integer id) {
         personService.deleteToUser(id);
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 }
