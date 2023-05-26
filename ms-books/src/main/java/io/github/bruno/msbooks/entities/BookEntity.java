@@ -15,6 +15,7 @@ public class BookEntity implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String author;
+    @Temporal(TemporalType.DATE)
     private LocalDate launch_date;
     private Double price;
     private String title;

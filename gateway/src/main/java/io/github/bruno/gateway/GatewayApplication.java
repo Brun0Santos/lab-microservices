@@ -18,7 +18,8 @@ public class GatewayApplication {
     @Bean
     public RouteLocator router(RouteLocatorBuilder routerLocator) {
         return routerLocator.routes()
-                .route(r -> r.path("/v1/**").uri("lb://ms-client"))
+                .route(r -> r.path("/v1/person/**").uri("lb://ms-client"))
+                .route(r -> r.path("/v1/books/**").uri("lb://ms-book"))
                 .build();
     }
 }

@@ -12,10 +12,16 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("/books")
+@RequestMapping("/v1/books")
 public class BookController {
     @Autowired
     private BookService service;
+
+    @GetMapping("/status")
+    public String statusSever(){
+        return "Server is running....";
+    }
+
 
     @GetMapping
     public ResponseEntity<List<BookEntity>> returnAllBook() {
