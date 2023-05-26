@@ -1,0 +1,1 @@
+ALTER TABLE tb_book RENAME localdate TO launch_date;
