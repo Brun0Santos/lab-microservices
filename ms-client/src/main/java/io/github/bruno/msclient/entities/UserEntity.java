@@ -27,7 +27,7 @@ public class UserEntity implements UserDetails {
     private boolean enabled;
 
     @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "user_permission", joinColumns = @JoinColumn(name = "id_user"),
+    @JoinTable(name = "tb_users_permission", joinColumns = @JoinColumn(name = "id_user"),
             inverseJoinColumns = @JoinColumn(name = "id_permission"))
     private List<PermissionEntity> permissions;
 
