@@ -17,15 +17,17 @@ public class PersonEntity {
     private String address;
     @Enumerated(EnumType.STRING)
     private GenderEnum gender;
+    private String password;
 
     public PersonEntity() {
     }
 
-    public PersonEntity(String firstname, String lastname, String address, GenderEnum gender) {
+    public PersonEntity(String firstname, String lastname, String address, GenderEnum gender, String password) {
         this.firstname = firstname;
         this.lastname = lastname;
         this.address = address;
         this.gender = gender;
+        this.password = password;
     }
 
     public Integer getId() {
@@ -48,14 +50,11 @@ public class PersonEntity {
         return gender;
     }
 
-    @Override
-    public String toString() {
-        return "PersonEntity{" +
-                "id=" + id +
-                ", firstname='" + firstname + '\'' +
-                ", lastname='" + lastname + '\'' +
-                ", address='" + address + '\'' +
-                ", gender='" + gender + '\'' +
-                '}';
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 }

@@ -5,7 +5,9 @@ import io.github.bruno.msclient.exceptions.UserNotFoundException;
 import io.github.bruno.msclient.repositories.PersonRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
 import java.util.List;
 import java.util.Optional;
 import java.util.logging.Logger;
@@ -15,6 +17,8 @@ public class PersonService {
 
     @Autowired
     private PersonRepository personRepository;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
     private final Logger logger = Logger.getLogger(PersonService.class.getName());
 
     public List<PersonEntity> getUsers() {
@@ -27,6 +31,7 @@ public class PersonService {
 
     @Transactional
     public void saveToUser(PersonEntity person) {
+        person.setPassword(passwordEncoder.encode(person.getPassword()));
         personRepository.save(person);
     }
 
