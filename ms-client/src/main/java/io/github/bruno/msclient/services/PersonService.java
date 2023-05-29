@@ -31,7 +31,6 @@ public class PersonService {
 
     @Transactional
     public void saveToUser(PersonEntity person) {
-        person.setPassword(passwordEncoder.encode(person.getPassword()));
         personRepository.save(person);
     }
 

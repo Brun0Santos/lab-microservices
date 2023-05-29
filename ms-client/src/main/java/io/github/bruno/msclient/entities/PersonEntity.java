@@ -2,10 +2,11 @@ package io.github.bruno.msclient.entities;
 
 import io.github.bruno.msclient.enums.GenderEnum;
 import jakarta.persistence.*;
+import org.springframework.security.core.userdetails.UserDetails;
 
 @Entity
 @Table(name = "tb_person")
-public class PersonEntity {
+public class PersonEntity  {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -17,17 +18,17 @@ public class PersonEntity {
     private String address;
     @Enumerated(EnumType.STRING)
     private GenderEnum gender;
-    private String password;
+
 
     public PersonEntity() {
     }
 
-    public PersonEntity(String firstname, String lastname, String address, GenderEnum gender, String password) {
+    public PersonEntity(String firstname, String lastname, String address, GenderEnum gender) {
         this.firstname = firstname;
         this.lastname = lastname;
         this.address = address;
         this.gender = gender;
-        this.password = password;
+
     }
 
     public Integer getId() {
@@ -50,11 +51,4 @@ public class PersonEntity {
         return gender;
     }
 
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
 }
